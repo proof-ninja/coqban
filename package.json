@@ -1,0 +1,10 @@
+{
+  "name": "coqban",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "proof ninja",
+  "license": "MIT",
+  "dependencies": {
+    "jscoq": "^0.12.3"
+  }
+}

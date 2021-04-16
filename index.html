@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.19/dist/css/uikit.min.css" />
+    <title>CoqBan</title>
+  </head>
+  <body>
+    <div id="main">
+      <header class="uk-navbar-container">
+        <div class="uk-navbar-left">
+          <div class="uk-navbar-item uk-logo">CoqBan</div>
+        </div>
+      </header>
+      <div class="uk-container">
+        <form class="gits-form uk-form-horizontal uk-margin-large-top">
+          <div class="uk-margin">
+            <label class="uk-form-label" for="gist_url">Gist URL</label>
+            <div class="uk-form-controls">
+              <input class="uk-input uk-form-width-large gist-url" type="text" name="gist_url" />
+            </div>
+          </div>
+          <div class="uk-margin">
+            <label class="uk-form-label" for="gist_filename">File Name</label>
+            <div class="uk-form-controls">
+              <input class="uk-input uk-form-width-large gist-filename" type="text" name="gist_filename" />
+            </div>
+          </div>
+          <div class="uk-margin">
+            <input class="uk-button uk-button-primary gist-submit" type="submit" value="Prove it!"/>
+          </div>
+        </form>
+
+        <div class="uk-alert uk-alert-danger uk-hidden coqban-alert"></div>
+    
+        <div class="coqban-codearea uk-hidden">
+          <code class="coq-code"></code>
+        </div>
+      </div>
+    </div>
+
+    <script src="node_modules/jscoq/ui-js/jscoq-loader.js"></script>
+    <script src="jscoq-embed.js"></script>
+  </body>
+</html>
