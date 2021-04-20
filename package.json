@@ -4,6 +4,12 @@
   "main": "index.js",
   "author": "proof ninja",
   "license": "MIT",
+  "browserslist": [
+    "since 2017-06"
+  ],
+  "scripts": {
+    "dev": "node ./server.js"
+  },
   "dependencies": {
     "jscoq": "^0.12.3"
   }
