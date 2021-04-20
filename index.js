@@ -1,3 +1,19 @@
+const gistUrlInput = document.querySelector(".gist-url");
+const gistFilenameInput = document.querySelector(".gist-filename");
+const alertSection = document.querySelector(".coqban-alert");
+const submitButton = document.querySelector(".gist-submit");
+const coqCodeArea = document.querySelector(".coqban-codearea");
+const coqCode = document.querySelector(".coq-code");
+
+submitButton.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  const url = new URL(window.location);
+  url.searchParams.set("gisturl", gistUrlInput.value);
+  url.searchParams.set("gistfilename", gistFilenameInput.value);
+  window.location.href = url.toString();
+});
+
 function jsCoqInject() {
   document.body.classList.add("toggled");
   document.body.id = "ide-wrapper";
@@ -40,18 +56,23 @@ function buildGistUrl(url, filename) {
   return `${url.replace("github.", "githubusercontent.")}/raw/${filename}`;
 }
 
-const gistUrlInput = document.querySelector(".gist-url");
-const gistFilenameInput = document.querySelector(".gist-filename");
-const alertSection = document.querySelector(".coqban-alert");
-const submitButton = document.querySelector(".gist-submit");
-const coqCodeArea = document.querySelector(".coqban-codearea");
-const coqCode = document.querySelector(".coq-code");
-
-async function fetchFile(event) {
-  event.preventDefault();
+async function main() {
   alertSection.classList.add("uk-hidden");
 
-  const targetUrl = buildGistUrl(gistUrlInput.value, gistFilenameInput.value);
+  const params = new URL(document.location).searchParams;
+  const gistUrl = params.get("gisturl") || "";
+  if (!gistUrl) {
+    return;
+  }
+  gistUrlInput.value = gistUrl;
+  const gistFileName = params.get("gistfilename") || "";
+  gistFilenameInput.value = gistFileName;
+  const targetUrl = buildGistUrl(gistUrl, gistFileName);
+
+  if (!targetUrl) {
+    return;
+  }
+
   try {
     const response = await fetch(targetUrl);
 
@@ -61,7 +82,6 @@ async function fetchFile(event) {
 
     const source = await response.text();
 
-    submitButton.disabled = true;
     coqCodeArea.classList.remove("uk-hidden");
     coqCode.innerHTML = source;
 
@@ -69,9 +89,8 @@ async function fetchFile(event) {
     jsCoqLoad();
   } catch (e) {
     console.error(e);
-    alertSection.innerHTML = "指定された URL かファイル名が正しくありません。";
+    alertSection.innerHTML = "Invalid url or filename.";
     alertSection.classList.remove("uk-hidden");
   }
 }
-
-submitButton.addEventListener("click", fetchFile);
+main();

@@ -25,7 +25,7 @@ const DEFAULT_MIMETYPE = "application/octet-stream";
 const server = http.createServer((req, res) => {
   console.log("request: ", req.url);
 
-  let filePath = "." + req.url;
+  let filePath = "." + req.url.replace(/\?.*$/, "");
   if (filePath == "./") {
     filePath = "./index.html";
   }
