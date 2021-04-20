@@ -1,10 +1,10 @@
-const http = require("http");
-const fs = require("fs");
-const path = require("path");
+import * as http from "http";
+import * as fs from "fs";
+import * as path from "path";
 
 const hostname = "127.0.0.1";
 const port = 3000;
-const mimeTypes = {
+const mimeTypes: { [name: string]: string } = {
   ".html": "text/html",
   ".js": "text/javascript",
   ".css": "text/css",
@@ -25,7 +25,7 @@ const DEFAULT_MIMETYPE = "application/octet-stream";
 const server = http.createServer((req, res) => {
   console.log("request: ", req.url);
 
-  let filePath = "." + req.url.replace(/\?.*$/, "");
+  let filePath = "." + (req.url || '').replace(/\?.*$/, "");
   if (filePath == "./") {
     filePath = "./index.html";
   }
