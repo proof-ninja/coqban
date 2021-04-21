@@ -1,9 +1,6 @@
 import { jsCoqInject, jsCoqLoad } from "./jscoq";
 
 const gistUrlInput = document.querySelector(".gist-url") as HTMLInputElement;
-const gistFilenameInput = document.querySelector(
-  ".gist-filename"
-) as HTMLInputElement;
 const alertSection = document.querySelector(".coqban-alert") as HTMLElement;
 const submitButton = document.querySelector(".gist-submit") as HTMLElement;
 const coqCodeArea = document.querySelector(".coqban-codearea") as HTMLElement;
@@ -14,12 +11,11 @@ submitButton.addEventListener("click", (event) => {
 
   const url = new URL(window.location.toString());
   url.searchParams.set("gisturl", gistUrlInput.value);
-  url.searchParams.set("gistfilename", gistFilenameInput.value);
   window.location.href = url.toString();
 });
 
-function buildGistUrl(url: string, filename: string) {
-  return `${url.replace("github.", "githubusercontent.")}/raw/${filename}`;
+function buildUrl(rawUrl: string) {
+  return `${rawUrl.replace("github.", "githubusercontent.")}/raw/`;
 }
 
 async function main() {
@@ -31,9 +27,7 @@ async function main() {
     return;
   }
   gistUrlInput.value = gistUrl;
-  const gistFileName = params.get("gistfilename") || "";
-  gistFilenameInput.value = gistFileName;
-  const targetUrl = buildGistUrl(gistUrl, gistFileName);
+  const targetUrl = buildUrl(gistUrl);
 
   if (!targetUrl) {
     return;
