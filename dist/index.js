@@ -34,7 +34,6 @@
   }
 
   const gistUrlInput = document.querySelector(".gist-url");
-  const gistFilenameInput = document.querySelector(".gist-filename");
   const alertSection = document.querySelector(".coqban-alert");
   const submitButton = document.querySelector(".gist-submit");
   const coqCodeArea = document.querySelector(".coqban-codearea");
@@ -43,11 +42,10 @@
       event.preventDefault();
       const url = new URL(window.location.toString());
       url.searchParams.set("gisturl", gistUrlInput.value);
-      url.searchParams.set("gistfilename", gistFilenameInput.value);
       window.location.href = url.toString();
   });
-  function buildGistUrl(url, filename) {
-      return `${url.replace("github.", "githubusercontent.")}/raw/${filename}`;
+  function buildUrl(rawUrl) {
+      return `${rawUrl.replace("github.", "githubusercontent.")}/raw/`;
   }
   async function main() {
       alertSection.classList.add("uk-hidden");
@@ -57,9 +55,7 @@
           return;
       }
       gistUrlInput.value = gistUrl;
-      const gistFileName = params.get("gistfilename") || "";
-      gistFilenameInput.value = gistFileName;
-      const targetUrl = buildGistUrl(gistUrl, gistFileName);
+      const targetUrl = buildUrl(gistUrl);
       if (!targetUrl) {
           return;
       }
