@@ -12,6 +12,7 @@
     "dev": "yarn build && node ./dist/server.js"
   },
   "dependencies": {
+    "@jscoq/mathcomp": "^0.12.3",
     "jscoq": "^0.12.3"
   },
   "devDependencies": {
