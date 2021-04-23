@@ -12,7 +12,7 @@ const jscoq_opts = {
   replace: true,
   base_path: "./node_modules/jscoq/",
   editor: { mode: { "company-coq": true }, keyMap: "default" },
-  all_pkgs: ["coq"],
+  all_pkgs: ["coq", "mathcomp"],
   init_pkgs: ["init"],
   init_import: ["utf8"],
   implicit_libs: true,
