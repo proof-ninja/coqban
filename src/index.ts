@@ -43,13 +43,13 @@ async function main() {
     const source = await response.text();
 
     coqCodeArea.classList.remove("uk-hidden");
-    coqCode.innerHTML = source;
+    coqCode.textContent = source;
 
     jsCoqInject();
     jsCoqLoad();
   } catch (e) {
     console.error(e);
-    alertSection.innerHTML = "Invalid url or filename.";
+    alertSection.innerText = "Invalid url or filename.";
     alertSection.classList.remove("uk-hidden");
   }
 }
