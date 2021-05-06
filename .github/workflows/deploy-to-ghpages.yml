@@ -11,14 +11,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        ref: gh-pages
     - name: Set git config
       run: |
         git config --local user.email "yoshihiro503@proofcafe.org"
         git config --local user.name "yoshihiro503"
     - name: Merge master branch
-      run: git fetch && git merge --allow-unrelated-histories origin/master
+      run: |
+        git fetch --unshallow origin gh-pages
+        git checkout gh-pages
+        git merge master
 
     - uses: actions/setup-node@v1
     - run: rm -rf node_modules && yarn install && yarn build
