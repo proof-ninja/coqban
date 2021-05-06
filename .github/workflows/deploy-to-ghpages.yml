@@ -20,10 +20,10 @@ jobs:
 
     - name: Set git config
       run: |
-      git config --local user.email "yoshihiro503@proofcafe.org"
-      git config --local user.name "yoshihiro503"
+        git config --local user.email "yoshihiro503@proofcafe.org"
+        git config --local user.name "yoshihiro503"
     - name: Commit and Push
       run: |
-      git add .
-      git commit -m Update
-      git push origin gh-pages
+        git add .
+        git commit -m Update
+        git push origin gh-pages
