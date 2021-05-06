@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "build": "rollup --config",
-    "dev": "yarn build && node ./dist/server.js"
+    "dev": "yarn build && node ./dist/server.js",
+    "typecheck": "yarn tsc --noEmit"
   },
   "dependencies": {
     "@jscoq/mathcomp": "^0.12.3",

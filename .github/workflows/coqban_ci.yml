@@ -1,0 +1,21 @@
+name: Coqban CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-and-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+    - run: rm -rf node_modules && yarn install --frozen-lockfile
+    - run: yarn build
+    - run: yarn typecheck
