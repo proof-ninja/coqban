@@ -18,10 +18,12 @@ jobs:
     - uses: actions/setup-node@v1
     - run: rm -rf node_modules && yarn install && yarn build
 
-    - run: |
+    - name: Set git config
+      run: |
       git config --local user.email "yoshihiro503@proofcafe.org"
       git config --local user.name "yoshihiro503"
-    - run: |
+    - name: Commit and Push
+      run: |
       git add .
       git commit -m Update
       git push origin gh-pages
