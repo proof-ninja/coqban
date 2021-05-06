@@ -10,15 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: gh-pages
     - name: Set git config
       run: |
         git config --local user.email "yoshihiro503@proofcafe.org"
         git config --local user.name "yoshihiro503"
-
-    - uses: actions/checkout@v2
-      with:
-        ref: gh-pages
-    - run: git fetch && git merge --allow-unrelated-histories origin/master
+    - name: Merge master branch
+      run: git fetch && git merge --allow-unrelated-histories origin/master
 
     - uses: actions/setup-node@v1
     - run: rm -rf node_modules && yarn install && yarn build
