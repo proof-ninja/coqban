@@ -13,8 +13,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set git config
       run: |
-        git config --local user.email "yoshihiro503@proofcafe.org"
-        git config --local user.name "yoshihiro503"
+        git config user.email "yoshihiro503@proofcafe.org"
+        git config user.name "yoshihiro503"
     - name: Merge master branch
       run: |
         git fetch --unshallow origin gh-pages
