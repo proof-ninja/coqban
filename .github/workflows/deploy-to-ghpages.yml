@@ -13,8 +13,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set git config
       run: |
-        git config user.email "yoshihiro503@proofcafe.org"
-        git config user.name "yoshihiro503"
+        git config --local user.email "yoshihiro503@proofcafe.org"
+        git config --local user.name "yoshihiro503"
     - name: Merge master branch
       run: |
         git fetch --unshallow origin gh-pages
@@ -26,5 +26,6 @@ jobs:
 
     - name: Commit and Push
       run: |
-        npm install -g --silent gh-pages
-        gh-pages --message "[skip ci] Updated" --dist . --dest .
+        git add --ignore-errors .
+        git commit -m Update
+        git push origin gh-pages
