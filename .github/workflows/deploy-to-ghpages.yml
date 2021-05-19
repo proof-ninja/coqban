@@ -15,6 +15,7 @@ jobs:
       run: |
         git config --local user.email "yoshihiro503@proofcafe.org"
         git config --local user.name "yoshihiro503"
+
     - name: Merge master branch
       run: |
         git fetch --unshallow origin gh-pages
@@ -22,10 +23,20 @@ jobs:
         git merge master
 
     - uses: actions/setup-node@v1
-    - run: rm -rf node_modules && yarn install && yarn build
+    - run: |
+        rm -rf node_modules
+        yarn install
+        yarn build
+
+    - name: Count changes
+      id: changes
+      run: |
+        git add -N .
+        echo "::set-output name=count::$(git diff --name-only | wc -l)"
 
     - name: Commit and Push
       run: |
-        git add --ignore-errors .
+        git add .
         git commit -m Update
         git push origin gh-pages
+      if: steps.changes.outputs.count > 0
