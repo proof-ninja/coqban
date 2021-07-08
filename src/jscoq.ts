@@ -3,11 +3,9 @@ export function jsCoqInject() {
   document.body.id = "ide-wrapper";
 }
 
-const jsCoqShow = localStorage.jsCoqShow !== "false";
-
 const jscoq_ids = [".coq-code"];
 const jscoq_opts = {
-  show: jsCoqShow,
+  show: true,
   focus: false,
   replace: true,
   base_path: "./node_modules/jscoq/",
@@ -28,9 +26,6 @@ export async function jsCoqLoad() {
     jscoq_opts
   );
   (window as any).coq = coq;
-  window.addEventListener("beforeunload", () => {
-    localStorage.jsCoqShow = coq.layout.isVisible();
-  });
   const page = document.querySelector<HTMLElement>("#page");
   if (page) {
     page.focus();
