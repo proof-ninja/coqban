@@ -5,10 +5,9 @@
       document.body.classList.add("toggled");
       document.body.id = "ide-wrapper";
   }
-  const jsCoqShow = localStorage.jsCoqShow !== "false";
   const jscoq_ids = [".coq-code"];
   const jscoq_opts = {
-      show: jsCoqShow,
+      show: true,
       focus: false,
       replace: true,
       base_path: "./node_modules/jscoq/",
@@ -21,9 +20,6 @@
   async function jsCoqLoad() {
       const coq = await JsCoq.start(jscoq_opts.base_path, "./node_modules", jscoq_ids, jscoq_opts);
       window.coq = coq;
-      window.addEventListener("beforeunload", () => {
-          localStorage.jsCoqShow = coq.layout.isVisible();
-      });
       const page = document.querySelector("#page");
       if (page) {
           page.focus();
