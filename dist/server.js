@@ -28,7 +28,7 @@ var http__namespace = /*#__PURE__*/_interopNamespace(http);
 var fs__namespace = /*#__PURE__*/_interopNamespace(fs);
 var path__namespace = /*#__PURE__*/_interopNamespace(path);
 
-const hostname = "127.0.0.1";
+const hostname = "0.0.0.0";
 const port = 3000;
 const mimeTypes = {
     ".html": "text/html",
